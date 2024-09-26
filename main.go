@@ -3,5 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Hello")
+	var mot string
+	mot = "hello"
+	fmt.Println("_ _ _ _ _ ")
+	fmt.Println(mot)
+	fmt.Scan(&mot)
+	fmt.Println(mot)
 }
