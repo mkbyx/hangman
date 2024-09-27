@@ -9,16 +9,18 @@ func main() {
 	var pv int = 10
 	var cmt int
 	var estla bool = false
+	var win bool
 	var tab []string
 
 	mot = "hello"
 	for i := 0; i < len(mot); i++ {
 		tab = append(tab, "_")
 		tab = append(tab, " ")
-		mot2 +="_ "
+		mot2 += "_ "
 	}
 	fmt.Println(mot2)
 	for {
+		win = true
 		fmt.Scan(&test)
 		if len(test) != 1 && test != mot {
 			pv--
@@ -48,9 +50,18 @@ func main() {
 		}
 		estla = false
 		mot2 = ""
-		for i := 0; i<len(tab); i++{
-			mot2+= tab[i]
+		for i := 0; i < len(tab); i++ {
+			mot2 += tab[i]
 		}
 		fmt.Println(mot2)
+		for i := 0; i < len(tab); i++ {
+			if tab[i] == "_" {
+				win = false
+			}
+		}
+		if win {
+			fmt.Println("GG vous avez gagné\n")
+			break
+		}
 	}
 }
