@@ -5,6 +5,7 @@ import "fmt"
 func main() {
 	var mot string
 	var test string
+	var mot2 string
 	var pv int = 10
 	var cmt int
 	var estla bool = false
@@ -14,8 +15,9 @@ func main() {
 	for i := 0; i < len(mot); i++ {
 		tab = append(tab, "_")
 		tab = append(tab, " ")
+		mot2 +="_ "
 	}
-	fmt.Println(tab)
+	fmt.Println(mot2)
 	for {
 		fmt.Scan(&test)
 		if len(test) != 1 && test != mot {
@@ -45,6 +47,10 @@ func main() {
 			break
 		}
 		estla = false
-		fmt.Println(tab)
+		mot2 = ""
+		for i := 0; i<len(tab); i++{
+			mot2+= tab[i]
+		}
+		fmt.Println(mot2)
 	}
 }
