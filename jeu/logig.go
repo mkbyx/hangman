@@ -1,17 +1,10 @@
-package main
+package hangman
 
 import (
-	j "hangman/jeu"
-)
-import (
-	"bufio"
 	"fmt"
-	"math/rand"
-	"os"
 )
 
-func main() {
-	j.Jeu()
+func Jeu() {
 	var mot string
 	var test string
 	var mot2 string
@@ -20,25 +13,8 @@ func main() {
 	var estla bool = false
 	var win bool
 	var tab []string
-
-	fichier, err := os.Open("data/motsimple.txt")
-	if err != nil {
-		fmt.Println("Erreur:", err)
-		return
-	}
-	defer fichier.Close()
-	var mots []string
-	scanner := bufio.NewScanner(fichier)
-	for scanner.Scan() {
-		mots = append(mots, scanner.Text())
-	}
-	if len(mots) == 0 {
-		fmt.Println("le fichier ne contient rien")
-		return
-	}
-	//Padrol Mods
-	mot = mots[rand.Intn(200)]
-	fmt.Println(mot)
+	WelcomePlayer()
+	mot = "hello"
 	for i := 0; i < len(mot); i++ {
 		tab = append(tab, "_")
 		tab = append(tab, " ")
@@ -50,10 +26,10 @@ func main() {
 		fmt.Scan(&test)
 		if len(test) != 1 && test != mot {
 			pv--
-			fmt.Printf("il vous reste %d chances\n", pv)
+			PrintNext(pv, test)
 		}
 		if len(test) != 1 && test == mot {
-			fmt.Printf("GG tu as trouvé le mot : %s \n", mot)
+			PrintWin(mot)
 			break
 		}
 		for _, i := range mot {
@@ -64,14 +40,12 @@ func main() {
 			cmt += 2
 		}
 		cmt = 0
-		if !estla {
+		if !estla && len(test) == 1 {
 			pv--
-			fmt.Printf("\nla lettre %s n est pas dans le mot\n", test)
-			fmt.Printf("il vous reste %d chances\n", pv)
-
+			PrintNext(pv, test)
 		}
 		if pv <= 0 {
-			fmt.Println("vous avez perdu")
+			PrintLose(mot)
 			break
 		}
 		estla = false
@@ -86,7 +60,7 @@ func main() {
 			}
 		}
 		if win {
-			fmt.Println("GG vous avez gagné\n")
+			PrintWin(mot)
 			break
 		}
 	}
