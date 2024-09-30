@@ -1,7 +1,7 @@
 package hangman
 
-import ("fmt"
-	hg "hangman/fonction"
+import (
+	"fmt"
 )
 
 func Jeu() {
@@ -13,7 +13,7 @@ func Jeu() {
 	var estla bool = false
 	var win bool
 	var tab []string
-	hg.WelcomePlayer()
+	WelcomePlayer()
 	mot = "hello"
 	for i := 0; i < len(mot); i++ {
 		tab = append(tab, "_")
@@ -26,10 +26,10 @@ func Jeu() {
 		fmt.Scan(&test)
 		if len(test) != 1 && test != mot {
 			pv--
-			hg.PrintNext(pv, test)
+			PrintNext(pv, test)
 		}
 		if len(test) != 1 && test == mot {
-			hg.PrintWin(mot)
+			PrintWin(mot)
 			break
 		}
 		for _, i := range mot {
@@ -42,10 +42,10 @@ func Jeu() {
 		cmt = 0
 		if !estla && len(test) == 1 {
 			pv--
-			hg.PrintNext(pv, test)
+			PrintNext(pv, test)
 		}
 		if pv <= 0 {
-			hg.PrintLose(mot)
+			PrintLose(mot)
 			break
 		}
 		estla = false
@@ -60,7 +60,7 @@ func Jeu() {
 			}
 		}
 		if win {
-			hg.PrintWin(mot)
+			PrintWin(mot)
 			break
 		}
 	}
