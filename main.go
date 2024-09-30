@@ -1,6 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+func PrintWin(str string) {
+	fmt.Printf("GG tu as trouvé le mot : %s \n", str)
+}
+
+func PrintLose(str string) {
+	fmt.Printf("vous avez perdu\nLe mot était %s.", str)
+}
+
+func PrintNext(n int, str string) {
+	if len(str) == 1 {
+		fmt.Printf("\nla lettre %s n est pas dans le mot\n", str)
+	}
+	if len(str) != 1 {
+		fmt.Printf("\nCe n'est pas le mot :  %s\n", str)
+	}
+	fmt.Printf("il vous reste %d chances\n", n)
+}
 
 func main() {
 	var mot string
@@ -24,10 +44,10 @@ func main() {
 		fmt.Scan(&test)
 		if len(test) != 1 && test != mot {
 			pv--
-			fmt.Printf("il vous reste %d chances\n", pv)
+			PrintNext(pv, test)
 		}
 		if len(test) != 1 && test == mot {
-			fmt.Printf("GG tu as trouvé le mot : %s \n", mot)
+			PrintWin(mot)
 			break
 		}
 		for _, i := range mot {
@@ -38,14 +58,12 @@ func main() {
 			cmt += 2
 		}
 		cmt = 0
-		if !estla {
+		if !estla && len(test) == 1 {
 			pv--
-			fmt.Printf("\nla lettre %s n est pas dans le mot\n", test)
-			fmt.Printf("il vous reste %d chances\n", pv)
-
+			PrintNext(pv, test)
 		}
 		if pv <= 0 {
-			fmt.Println("vous avez perdu")
+			PrintLose(mot)
 			break
 		}
 		estla = false
@@ -60,7 +78,7 @@ func main() {
 			}
 		}
 		if win {
-			fmt.Println("GG vous avez gagné\n")
+			PrintWin(mot)
 			break
 		}
 	}
