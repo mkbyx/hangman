@@ -1,0 +1,67 @@
+package hangman
+
+import ("fmt"
+	hg "hangman/fonction"
+)
+
+func Jeu() {
+	var mot string
+	var test string
+	var mot2 string
+	var pv int = 10
+	var cmt int
+	var estla bool = false
+	var win bool
+	var tab []string
+	hg.WelcomePlayer()
+	mot = "hello"
+	for i := 0; i < len(mot); i++ {
+		tab = append(tab, "_")
+		tab = append(tab, " ")
+		mot2 += "_ "
+	}
+	fmt.Println(mot2)
+	for {
+		win = true
+		fmt.Scan(&test)
+		if len(test) != 1 && test != mot {
+			pv--
+			hg.PrintNext(pv, test)
+		}
+		if len(test) != 1 && test == mot {
+			hg.PrintWin(mot)
+			break
+		}
+		for _, i := range mot {
+			if string(i) == test {
+				tab[cmt] = test
+				estla = true
+			}
+			cmt += 2
+		}
+		cmt = 0
+		if !estla && len(test) == 1 {
+			pv--
+			hg.PrintNext(pv, test)
+		}
+		if pv <= 0 {
+			hg.PrintLose(mot)
+			break
+		}
+		estla = false
+		mot2 = ""
+		for i := 0; i < len(tab); i++ {
+			mot2 += tab[i]
+		}
+		fmt.Println(mot2)
+		for i := 0; i < len(tab); i++ {
+			if tab[i] == "_" {
+				win = false
+			}
+		}
+		if win {
+			hg.PrintWin(mot)
+			break
+		}
+	}
+}
