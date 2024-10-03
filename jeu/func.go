@@ -1,6 +1,10 @@
 package hangman
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 func WelcomePlayer() {
 	var Reset = "\033[0m"
@@ -39,4 +43,46 @@ func PrintNext(n int, str string) {
 		fmt.Printf("\nCe n'est pas le mot :  %s\n", str)
 	}
 	fmt.Printf("il vous reste %d chances\n", n)
+}
+
+func afficherPendu() {
+	fichier, err := os.Open("data/hangman.txt")
+	if err != nil {
+		fmt.Println("Erreur:", err)
+		return
+	}
+	defer fichier.Close()
+	scanner := bufio.NewScanner(fichier)
+	i := 0
+	j := -1
+	for scanner.Scan() {
+		if i%8 == 0 {
+			pendu = append(pendu, scanner.Text())
+			j++
+		}
+		if i%8 != 0 {
+			pendu[j] = pendu[j] + "\n" + scanner.Text()
+		}
+		i++
+	}
+	if len(pendu) == 0 {
+		fmt.Println("le fichier ne contient rien")
+		return
+	}
+}
+func motAlea() {
+	fichier, err := os.Open("data/motsimple.txt")
+	if err != nil {
+		fmt.Println("Erreur:", err)
+		return
+	}
+	defer fichier.Close()
+	scanner := bufio.NewScanner(fichier)
+	for scanner.Scan() {
+		mots = append(mots, scanner.Text())
+	}
+	if len(mots) == 0 {
+		fmt.Println("le fichier ne contient rien")
+		return
+	}
 }

@@ -1,31 +1,16 @@
 package hangman
 
 import (
-	"bufio"
 	"fmt"
 	"math/rand"
-	"os"
+	"strings"
 )
 
 func Jeu() {
 	WelcomePlayer()
-	fichier, err := os.Open("data/motsimple.txt")
-	if err != nil {
-		fmt.Println("Erreur:", err)
-		return
-	}
-	defer fichier.Close()
-	var mots []string
-	scanner := bufio.NewScanner(fichier)
-	for scanner.Scan() {
-		mots = append(mots, scanner.Text())
-	}
-	if len(mots) == 0 {
-		fmt.Println("le fichier ne contient rien")
-		return
-	}
-	//Padrol Mods
-	mot = mots[rand.Intn(200)]
+	afficherPendu()
+	motAlea()
+	mot = strings.ToLower(mots[rand.Intn(200)])
 	for i := 0; i < len(mot); i++ {
 		tab = append(tab, "_")
 		tab = append(tab, " ")
@@ -69,6 +54,9 @@ func Jeu() {
 			if tab[i] == "_" {
 				win = false
 			}
+		}
+		if pv != 10 {
+			fmt.Printf(pendu[9-pv])
 		}
 		if win {
 			PrintWin(mot)
