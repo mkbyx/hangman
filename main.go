@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	j.Jeu()
+	j.Menu()
 }

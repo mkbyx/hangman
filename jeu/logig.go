@@ -6,8 +6,24 @@ import (
 	"strings"
 )
 
-func Jeu() {
+func Menu() {
 	WelcomePlayer()
+	fmt.Println("Bienvenu")
+	for {
+		fmt.Println("Pour jouer, écrire [play]\nPour quitter, écrire [quit]")
+		fmt.Scan(&play)
+		if play == "play" {
+			Jeu()
+			continue
+		}
+		if play == "quit" {
+			break
+		}
+		fmt.Println("commande invalide")
+	}
+}
+
+func Jeu() {
 	afficherPendu()
 	motAlea()
 	mot = strings.ToLower(mots[rand.Intn(200)])

@@ -1,6 +1,7 @@
 package hangman
 
 var mot string
+var play string
 var test string
 var mot2 string
 var pv int = 10
