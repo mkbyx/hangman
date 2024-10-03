@@ -1,0 +1,19 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	vies := 6
+
+	for vies > 0 {
+		fmt.Println("Oups, mauvaix choix...")
+
+		fmt.Printf("Il te reste %d vie(s).\n, vies")
+
+		if vies == 0 {
+			fmt.Println("GAME OVER")
+		}
+	}
+}
