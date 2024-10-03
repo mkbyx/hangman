@@ -5,14 +5,6 @@ import (
 )
 
 func Jeu() {
-	var mot string
-	var test string
-	var mot2 string
-	var pv int = 10
-	var cmt int
-	var estla bool = false
-	var win bool
-	var tab []string
 	WelcomePlayer()
 	mot = "hello"
 	for i := 0; i < len(mot); i++ {
