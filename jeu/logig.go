@@ -62,7 +62,6 @@ func Jeu() {
 		if pv <= 0 {
 			PrintLose(mot)
 			lose = true
-
 		}
 		estla = false
 		mot2 = ""
