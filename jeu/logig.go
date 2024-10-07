@@ -29,7 +29,6 @@ func Jeu() {
 	motAlea()
 	mot = strings.ToLower(mots[rand.Intn(200)])
 	mot2 = ""
-	
 	tab = nil
 	pv = 10
 	for i := 0; i < len(mot); i++ {
