@@ -13,7 +13,7 @@ func Menu() {
 		fmt.Println("Pour jouer, écrire [play]\nPour quitter, écrire [quit]")
 		fmt.Scan(&play)
 		if play == "play" {
-			Jeu()
+			Game()
 			continue
 		}
 		if play == "quit" {
@@ -23,66 +23,66 @@ func Menu() {
 	}
 }
 
-func Jeu() {
-	pendu = nil
-	afficherPendu()
-	motAlea()
-	mot = strings.ToLower(mots[rand.Intn(200)])
-	mot2 = ""
-	
+func Game() {
+	hangman = nil
+	printHangman()
+	randomWord()
+	word = strings.ToLower(words[rand.Intn(200)])
+	wordfind = ""
+
 	tab = nil
 	pv = 10
-	for i := 0; i < len(mot); i++ {
+	for i := 0; i < len(word); i++ {
 		tab = append(tab, "_")
 		tab = append(tab, " ")
-		mot2 += "_ "
+		wordfind += "_ "
 	}
-	fmt.Println(mot2)
+	fmt.Println(wordfind)
 	for {
 		win = true
 		lose = false
-		fmt.Scan(&test)
-		if len(test) != 1 && test != mot {
+		fmt.Scan(&input)
+		if len(input) != 1 && input != word {
 			pv--
-			PrintNext(pv, test)
+			PrintNext(pv, input)
 		}
-		if len(test) != 1 && test == mot {
-			PrintWin(mot)
+		if len(input) != 1 && input == word {
+			PrintWin(word)
 			break
 		}
-		for _, i := range mot {
-			if string(i) == test {
-				tab[cmt] = test
-				estla = true
+		for _, i := range word {
+			if string(i) == input {
+				tab[count] = input
+				ishere = true
 			}
-			cmt += 2
+			count += 2
 		}
-		cmt = 0
-		if !estla && len(test) == 1 {
+		count = 0
+		if !ishere && len(input) == 1 {
 			pv--
-			PrintNext(pv, test)
+			PrintNext(pv, input)
 		}
 		if pv <= 0 {
-			PrintLose(mot)
+			PrintLose(word)
 			lose = true
 
 		}
-		estla = false
-		mot2 = ""
+		ishere = false
+		wordfind = ""
 		for i := 0; i < len(tab); i++ {
-			mot2 += tab[i]
+			wordfind += tab[i]
 		}
-		fmt.Println(mot2)
+		fmt.Println(wordfind)
 		for i := 0; i < len(tab); i++ {
 			if tab[i] == "_" {
 				win = false
 			}
 		}
 		if pv != 10 {
-			fmt.Printf(pendu[9-pv])
+			fmt.Printf(hangman[9-pv])
 		}
 		if win {
-			PrintWin(mot)
+			PrintWin(word)
 			break
 		}
 		if lose {

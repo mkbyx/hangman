@@ -45,7 +45,7 @@ func PrintNext(n int, str string) {
 	fmt.Printf("il vous reste %d chances\n", n)
 }
 
-func afficherPendu() {
+func printHangman() {
 	fichier, err := os.Open("data/hangman.txt")
 	if err != nil {
 		fmt.Println("Erreur:", err)
@@ -57,21 +57,21 @@ func afficherPendu() {
 	j := -1
 	for scanner.Scan() {
 		if i%8 == 0 {
-			pendu = append(pendu, scanner.Text())
+			hangman = append(hangman, scanner.Text())
 			j++
 		}
 		if i%8 != 0 {
-			pendu[j] = pendu[j] + "\n" + scanner.Text()
+			hangman[j] = hangman[j] + "\n" + scanner.Text()
 		}
 		i++
 	}
-	if len(pendu) == 0 {
+	if len(hangman) == 0 {
 		fmt.Println("le fichier ne contient rien")
 		return
 	}
 }
 
-func motAlea() {
+func randomWord() {
 	fichier, err := os.Open("data/motsimple.txt")
 	if err != nil {
 		fmt.Println("Erreur:", err)
@@ -80,9 +80,9 @@ func motAlea() {
 	defer fichier.Close()
 	scanner := bufio.NewScanner(fichier)
 	for scanner.Scan() {
-		mots = append(mots, scanner.Text())
+		words = append(words, scanner.Text())
 	}
-	if len(mots) == 0 {
+	if len(words) == 0 {
 		fmt.Println("le fichier ne contient rien")
 		return
 	}
