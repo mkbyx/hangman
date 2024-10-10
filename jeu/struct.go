@@ -4,6 +4,7 @@ var word string
 var play string
 var input string
 var wordfind string
+var wordcomp string
 var pv int = 10
 var count int
 var ishere bool = false

@@ -10,7 +10,7 @@ func Menu() {
 	WelcomePlayer()
 	fmt.Println("Bienvenu")
 	for {
-		fmt.Println("Pour jouer, écrire [play]\nPour quitter, écrire [quit]")
+		fmt.Println("\nPour jouer, écrire [play]\nPour quitter, écrire [quit]")
 		fmt.Scan(&play)
 		if play == "play" {
 			Game()
@@ -29,19 +29,29 @@ func Game() {
 	randomWord()
 	word = strings.ToLower(words[rand.Intn(200)])
 	wordfind = ""
-
+	wordcomp = ""
 	tab = nil
 	pv = 10
-	for i := 0; i < len(word); i++ {
+	wordletter := []rune(word)
+	for i := 0; i < len([]rune(word)); i++ {
 		tab = append(tab, "_")
 		tab = append(tab, " ")
 		wordfind += "_ "
+		if wordletter[i] != 'é' && wordletter[i] != 'è' {
+			wordcomp += string(wordletter[i])
+		}
+		if wordletter[i] == 'é' || wordletter[i] == 'è' {
+			wordcomp += "e"
+		}
 	}
 	fmt.Println(wordfind)
 	for {
 		win = true
 		lose = false
 		fmt.Scan(&input)
+		if input == "é" || input == "è" {
+			input = "e"
+		}
 		if len(input) != 1 && input != word {
 			pv--
 			PrintNext(pv, input)
@@ -50,7 +60,7 @@ func Game() {
 			PrintWin(word)
 			break
 		}
-		for _, i := range word {
+		for _, i := range wordcomp {
 			if string(i) == input {
 				tab[count] = input
 				ishere = true
@@ -72,7 +82,8 @@ func Game() {
 		for i := 0; i < len(tab); i++ {
 			wordfind += tab[i]
 		}
-		fmt.Println(wordfind)
+		if pv != 0{
+		fmt.Println(wordfind)}
 		for i := 0; i < len(tab); i++ {
 			if tab[i] == "_" {
 				win = false

@@ -32,7 +32,7 @@ func PrintWin(str string) {
 }
 
 func PrintLose(str string) {
-	fmt.Printf("vous avez perdu\nLe mot était %s.", str)
+	fmt.Printf("vous avez perdu\nLe mot était %s.\n", str)
 }
 
 func PrintNext(n int, str string) {
@@ -72,7 +72,7 @@ func printHangman() {
 }
 
 func randomWord() {
-	fichier, err := os.Open("data/motsimple.txt")
+	fichier, err := os.Open("data/motdur.txt")
 	if err != nil {
 		fmt.Println("Erreur:", err)
 		return
