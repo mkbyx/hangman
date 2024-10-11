@@ -8,7 +8,7 @@ import (
 
 func Menu() {
 	WelcomePlayer()
-	fmt.Println("Bienvenu")
+	fmt.Println("Bienvenue")
 	for {
 		fmt.Println("\nPour jouer, écrire [play]\nPour quitter, écrire [quit]")
 		fmt.Scan(&play)
