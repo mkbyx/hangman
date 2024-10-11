@@ -49,7 +49,7 @@ func PrintNext(n int, str string) {
 }
 
 func PrintTab(){
-	fmt.Println(tab)
+	fmt.Println(tabletter)
 }
 
 //Affiche le Print du Hangman au fur et à mesure du nombre d'erreur qu'on commet

@@ -65,6 +65,7 @@ func Game() {
 		if !ishere && len(input) == 1 {
 			pv--
 			PrintNext(pv, input)
+			PrintTab()
 		}
 		//Si il ne reste plus d'essaie, on affiche le message de défaite
 		if pv <= 0 {
