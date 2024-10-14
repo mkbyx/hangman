@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 )
-//Affiche le Nom du jeu avec des jolies couleurs
+//Displays the game name in pretty colors
 func WelcomePlayer() {
 	var Reset = "\033[0m"
 	var Red = "\033[31m"
@@ -27,17 +27,17 @@ func WelcomePlayer() {
 	fmt.Println(Blue + asciiArt5 + Reset)
 }
 
-//Affiche la victoie en cas de victoire
+//Shows victory when winning
 func PrintWin(str string) {
 	fmt.Printf("GG tu as trouvé le mot : %s \n", str)
 }
 
-//Affiche la défaite en cas de défaite
+//Shows defeat when defeated
 func PrintLose(str string) {
-	fmt.Printf("vous avez perdu\nLe mot était %s.", str)
+	fmt.Printf("vous avez perdu\nLe mot était %s.\n", str)
 }
 
-//Affiche une erreur en cas de mauvais entrée et le reste d'essaie qu'il reste
+//Shows an error in case of bad input and the rest tries what remains
 func PrintNext(n int, str string) {
 	if len(str) == 1 {
 		fmt.Printf("\nla lettre %s n est pas dans le mot\n", str)
@@ -52,7 +52,7 @@ func PrintTab(){
 	fmt.Println(tabletter)
 }
 
-//Affiche le Print du Hangman au fur et à mesure du nombre d'erreur qu'on commet
+//Displays the Hangman Print as the number of errors is made
 func printHangman() {
 	fichier, err := os.Open("data/hangman.txt")
 	if err != nil {
@@ -79,9 +79,16 @@ func printHangman() {
 	}
 }
 
-//Sélectione un mot aléatoirement dans un fichier texte
+//Select a random word from a text file
 func randomWord() {
-	fichier, err := os.Open("data/motsimple.txt")
+	if len(os.Args) < 2 || os.Args[1] == "-s" {
+		nameFill = "data/motsimple.txt"
+	} else if os.Args[1] == "-d" {
+		nameFill = "data/motdur.txt"
+	} else {
+		fmt.Println("arg invalide")
+	}
+	fichier, err := os.Open(nameFill)
 	if err != nil {
 		fmt.Println("Erreur:", err)
 		return
