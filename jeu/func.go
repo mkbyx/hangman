@@ -72,7 +72,14 @@ func printHangman() {
 }
 
 func randomWord() {
-	fichier, err := os.Open("data/motdur.txt")
+	if len(os.Args) < 2 || os.Args[1] == "-s" {
+		nameFill = "data/motsimple.txt"
+	} else if os.Args[1] == "-d" {
+		nameFill = "data/motdur.txt"
+	} else {
+		fmt.Println("arg invalide")
+	}
+	fichier, err := os.Open(nameFill)
 	if err != nil {
 		fmt.Println("Erreur:", err)
 		return
