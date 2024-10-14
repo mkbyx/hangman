@@ -3,10 +3,24 @@ package hangman
 import (
 	"fmt"
 	"math/rand"
+	"os"
 	"strings"
 )
 
 func Menu() {
+	if len(os.Args)<2{
+		nameFill = "data/motsimple.txt"
+	}else if os.Args[1] == "-h" {
+		fmt.Println("les arguments sont -s pour les mots simples\n et -d pour les mots durs les mots sont par default")
+		return
+	} else if os.Args[1] == "-s" {
+		nameFill = "data/motsimple.txt"
+	} else if os.Args[1] == "-d" {
+		nameFill = "data/motdur.txt"
+	} else {
+		fmt.Println("arg invalide")
+		return
+	}
 	WelcomePlayer()
 	fmt.Println("Bienvenue")
 	for {
@@ -69,19 +83,19 @@ func Game() {
 		if input == "à" {
 			input = "a"
 		}
-		for _, i:= range letterTestedFalse{
-			if i == input{
+		for _, i := range letterTestedFalse {
+			if i == input {
 				fmt.Println("t'as déjà testé la lettre(espèce de débile)")
 				stupid = true
 			}
 		}
-		for _, i:= range letterTestedTrue{
-			if i == input{
+		for _, i := range letterTestedTrue {
+			if i == input {
 				fmt.Println("t'as déjà testé la lettre(espèce de débile)")
 				stupid = true
 			}
 		}
-		if stupid{
+		if stupid {
 			continue
 		}
 		if len(input) != 1 && input != word {
