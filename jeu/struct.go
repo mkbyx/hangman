@@ -1,5 +1,6 @@
 package hangman
 
+//Large Variable Libraries
 var word string
 var play string
 var diff string
@@ -14,6 +15,7 @@ var win bool
 var stupid bool
 var lose bool
 var tab []string
+var tabletter[]string
 var words []string
 var hangman []string
 var letterTestedTrue []string

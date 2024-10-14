@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+//Shows the message of commands entered, launches or closes the game depending on the command entered
 func Menu() {
 	if len(os.Args)<2{
 		nameFill = "data/motsimple.txt"
@@ -46,10 +47,12 @@ func Menu() {
 	}
 }
 
+//Run the entire flow of the game
 func Game() {
 	hangman = nil
 	printHangman()
 	randomWord()
+	//defined the elements of the game
 	word = strings.ToLower(words[rand.Intn(200)])
 	wordfind = ""
 	wordcomp = ""
@@ -104,8 +107,9 @@ func Game() {
 			}
 			pv -= 2
 			PrintNext(pv, input)
+			PrintTab()
 		}
-		if len(input) != 1 && input == word {
+		if len(input) > 1 && input == word {
 			PrintWin(word)
 			break
 		}
@@ -130,11 +134,12 @@ func Game() {
 		if !ishere && len(input) == 1 {
 			pv--
 			PrintNext(pv, input)
+			PrintTab()
 		}
+		//If there are no more attempts left, the defeat message is displayed.
 		if pv <= 0 {
 			PrintLose(word)
 			lose = true
-
 		}
 		ishere = false
 		wordfind = ""
@@ -156,6 +161,7 @@ func Game() {
 				win = false
 			}
 		}
+		//Displays the Hangman according to the number of tries we have
 		if pv != 10 {
 			fmt.Printf(hangman[9-pv])
 		}
@@ -166,6 +172,5 @@ func Game() {
 		if lose {
 			break
 		}
-
 	}
 }

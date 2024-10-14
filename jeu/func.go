@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 )
-
+//Displays the game name in pretty colors
 func WelcomePlayer() {
 	var Reset = "\033[0m"
 	var Red = "\033[31m"
@@ -27,24 +27,32 @@ func WelcomePlayer() {
 	fmt.Println(Blue + asciiArt5 + Reset)
 }
 
+//Shows victory when winning
 func PrintWin(str string) {
 	fmt.Printf("GG tu as trouvé le mot : %s \n", str)
 }
 
+//Shows defeat when defeated
 func PrintLose(str string) {
 	fmt.Printf("vous avez perdu\nLe mot était %s.\n", str)
 }
 
+//Shows an error in case of bad input and the rest tries what remains
 func PrintNext(n int, str string) {
 	if len(str) == 1 {
 		fmt.Printf("\nla lettre %s n est pas dans le mot\n", str)
 	}
-	if len(str) != 1 {
+	if len(str) > 1 {
 		fmt.Printf("\nCe n'est pas le mot :  %s\n", str)
 	}
 	fmt.Printf("il vous reste %d chances\n", n)
 }
 
+func PrintTab(){
+	fmt.Println(tabletter)
+}
+
+//Displays the Hangman Print as the number of errors is made
 func printHangman() {
 	fichier, err := os.Open("data/hangman.txt")
 	if err != nil {
@@ -71,6 +79,7 @@ func printHangman() {
 	}
 }
 
+//Select a random word from a text file
 func randomWord() {
 	fichier, err := os.Open(nameFill)
 	if err != nil {
