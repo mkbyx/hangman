@@ -5,3 +5,7 @@
  Une fois le clone fait, vous devrez ouvrir le clone (C'est un fichier) dans VsCode, et vous n'aurez plus qu'à faire la commande suivante : go run main.go ou go run main . 
  
  Voilà vous pouvez profiter du jeu
+
+Credit:
+
+Anthony Rakotondrasoa : https://github.com/24PADROL Léo Carno : https://github.com/mkbyx Yasmine Fakir: https://github.com/Yasmine200 Mahan Mir : https://github.com/nothypaa
